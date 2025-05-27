@@ -99,7 +99,7 @@ const isValid = computed(() => {
     let error = ""
     if (recipient.value.length !== amount.value.length) {
         ok = false
-        error = "Unknown Error occured"
+        error = "Unknown Error occurred"
     }
     if (recipient.value.some((r, i) => (!r && !!amount.value[i]) || (!!r && !amount.value[i]))) {
         // when recipient is empty, amount should be empty and vice versa
