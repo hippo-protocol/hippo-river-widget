@@ -146,7 +146,7 @@ defineExpose({ msgs, isValid, initial })
                 </option>
             </select>
         </div>
-        <div v-for="(r, i) in recipient" class="border-b border-black pb-4">
+        <div v-for="(r, i) in recipient" :key="i" class="border-b border-black pb-4">
             <div class="form-control">
                 <label class="label">
                     <span class="label-text">Recipient{{ i + 1 }}</span>
