@@ -7,7 +7,6 @@ import {
     getBalanceMetadata,
     getIBCDenomMetadata,
     getLatestBlock,
-    getStakingParam,
     getTxByHash,
 } from '../../utils/http';
 import { base64ToHex } from '../../utils/format';
@@ -26,6 +25,7 @@ import Vote from './messages/Vote.vue';
 import Withdraw from './messages/Withdraw.vue';
 import WithdrawCommission from './messages/WithdrawCommission.vue';
 import Propose from './messages/Propose.vue';
+import MultiSend from './messages/MultiSend.vue';
 
 // wasm msgs
 import StoreCode from './wasm/StoreCode.vue';
@@ -50,6 +50,8 @@ const msgType = computed(() => {
     switch (props.type?.toLowerCase()) {
         case 'send':
             return Send;
+        case 'multisend':
+            return MultiSend;
         case 'propose':
             return Propose;
         case 'delegate':

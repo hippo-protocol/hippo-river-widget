@@ -11,8 +11,8 @@ interface Config {
 }
 
 const HIPPO: Config = {
-    endpoint: 'https://api.hippo-protocol.com',
-    chainId: 'hippo-protocol-1',
+    endpoint: 'https://api.testnet.hippo-protocol.com',
+    chainId: 'hippo-protocol-testnet-1',
     params: JSON.stringify({}), //change when needed(vote, ...)
     chainName: 'hippo-protocol',
 };
@@ -24,6 +24,7 @@ const conf = ref(HIPPO);
 
 const types = [
     'send',
+    'multisend',
     'propose',
     'delegate',
     'vote',
