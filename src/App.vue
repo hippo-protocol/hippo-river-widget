@@ -10,7 +10,14 @@ interface Config {
     params: string;
 }
 
-const HIPPO: Config = {
+const HIPPO_MAINNET: Config = {
+    endpoint: 'https://api.hippo-protocol.com',
+    chainId: 'hippo-protocol-1',
+    params: JSON.stringify({}), //change when needed(vote, ...)
+    chainName: 'hippo-protocol',
+};
+
+const HIPPO_TESTNET: Config = {
     endpoint: 'https://api.testnet.hippo-protocol.com',
     chainId: 'hippo-protocol-testnet-1',
     params: JSON.stringify({}), //change when needed(vote, ...)
@@ -20,7 +27,7 @@ const HIPPO: Config = {
 const sender = ref('') //Connected wallet address
 const hdPath = ref(DEFAULT_HDPATH) //Default HD path
 
-const conf = ref(HIPPO);
+const conf = ref(HIPPO_TESTNET);
 
 const types = [
     'send',
@@ -65,17 +72,32 @@ const onConnect = (wallet: any) => {
     hdPath.value = wallet.detail.value.hdPath;
 };
 
+const toggleChain = () => {
+    if (conf.value.chainId.includes('testnet')) {
+        conf.value = HIPPO_MAINNET;
+    } else {
+        conf.value = HIPPO_TESTNET;
+    }
+};
+
 </script>
 
 <template>
     <div class="bg-gray-50 dark:bg-base-100 dark:text-white min-h-[100vh]">
-        Ping Widget Version: {{ pingWidget?.version }}
-
+        <h1>Hippo River Widget {{ pingWidget?.version }}</h1>
         <div class="btn btn-sm normal-case" @click="switchTheme()">
             Theme: {{ theme }}
         </div>
 
         <div>&nbsp;</div>
+
+        Current Environment : <span style="font-weight: 600;">{{ conf.chainId }}</span>
+
+        <button class="bg-blue-300 hover:bg-blue-200 rounded ml-2" @click="toggleChain">Toggle to
+            {{ conf.chainId.includes('testnet') ? 'Mainnet' : 'Testnet' }}</button>
+
+
+        &nbsp;
         <ping-connect-wallet :chain-id="conf.chainId" :hd-path="hdPath" @connect="onConnect" />
 
         <textarea v-model="conf.params" cols="80" rows="5"></textarea>
