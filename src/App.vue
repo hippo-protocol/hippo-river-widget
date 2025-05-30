@@ -47,6 +47,8 @@ const types = [
     'wasm_migrate_contract',
     'wasm_update_admin',
     'wasm_clear_admin',
+    'community_pool_spend',
+    'update_params',
 ];
 const toOpen = ref('send');
 

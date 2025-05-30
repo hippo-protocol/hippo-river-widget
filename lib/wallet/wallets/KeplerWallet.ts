@@ -60,12 +60,13 @@ export class KeplerWallet implements AbstractWallet {
     isEthermint() {
         return this.conf.hdPath && this.conf.hdPath.startsWith("m/44'/60");
     }
-    async sign(transaction: Transaction): Promise<TxRaw> {
+    async sign(transaction: Transaction, direct?: boolean): Promise<TxRaw> {
         // sign wasm tx with signDirect
         if (
             transaction.messages.findIndex((x) =>
                 x.typeUrl.startsWith('/cosmwasm.wasm')
-            ) > -1
+            ) > -1 ||
+            direct
         ) {
             return this.signDirect(transaction);
         }

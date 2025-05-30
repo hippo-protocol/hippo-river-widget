@@ -189,3 +189,7 @@ export const getAuthority = async (endpoint: string) => {
 export const getCommunityPool = async (endpoint: string) => {
     return get(`${endpoint}/cosmos/distribution/v1beta1/community_pool`);
 };
+
+export const getGovParams = async (endpoint: string) => {
+    return get(`${endpoint}/cosmos/gov/v1/params/voting`);
+};
