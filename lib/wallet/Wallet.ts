@@ -1,26 +1,26 @@
-import { Registry } from '@cosmjs/proto-signing'
-import { defaultRegistryTypes } from "@cosmjs/stargate";
-import { Transaction } from "../utils/type";
+import { Registry } from '@cosmjs/proto-signing';
+import { defaultRegistryTypes } from '@cosmjs/stargate';
+import { Transaction } from '../utils/type';
 import { KeplerWallet } from './wallets/KeplerWallet';
 import { LedgerWallet } from './wallets/LedgerWallet';
 import { MetamaskWallet } from './wallets/MetamaskWallet';
 import { MetamaskSnapWallet } from './wallets/MetamaskSnapWallet';
 import { LeapWallet } from './wallets/LeapWallet';
-import { OKXWallet } from "./wallets/OKXWallet";
-import { UnisatWallet } from "./wallets/UnisatWallet";
+import { OKXWallet } from './wallets/OKXWallet';
+import { UnisatWallet } from './wallets/UnisatWallet';
 
 export enum WalletName {
-    Keplr = "Keplr",
-    Ledger = "LedgerUSB",
-    LedgerBLE = "LedgerBLE",
-    Metamask = "Metamask",
-    MetamaskSnap = "MetamaskSnap",
-    Leap = "Leap",
-    OKX = "OKX Wallet",
-    Unisat = "UniSat Wallet",
+    Keplr = 'Keplr',
+    Ledger = 'LedgerUSB',
+    LedgerBLE = 'LedgerBLE',
+    Metamask = 'Metamask',
+    MetamaskSnap = 'MetamaskSnap',
+    Leap = 'Leap',
+    OKX = 'OKX Wallet',
+    Unisat = 'UniSat Wallet',
     // None Signning
-    Address = "Address",
-    NameService = "Nameservice",
+    Address = 'Address',
+    NameService = 'Nameservice',
 }
 
 export interface IChain {
@@ -37,34 +37,34 @@ export interface IChain {
 }
 
 export interface ConnectedWallet {
-    wallet: WalletName,
-    cosmosAddress: string
-    hdPath?: string
+    wallet: WalletName;
+    cosmosAddress: string;
+    hdPath?: string;
 }
 
 export interface Account {
-    address: string,
-    algo: string,
-    pubkey: Uint8Array,
+    address: string;
+    algo: string;
+    pubkey: Uint8Array;
 }
 
 export interface WalletArgument {
-    chainId?: string,
-    hdPath?: string,
-    address?: string,
-    name?: string,
-    transport?: string
-    prefix?: string,
+    chainId?: string;
+    hdPath?: string;
+    address?: string;
+    name?: string;
+    transport?: string;
+    prefix?: string;
 }
 
 export interface AbstractWallet {
-    name: WalletName
+    name: WalletName;
     /**
      * The the accounts from the wallet (addresses)
      */
-    getAccounts(): Promise<Account[]>
-    supportCoinType(coinType?: string): Promise<boolean>
-    sign(transaction: Transaction): Promise<any>
+    getAccounts(): Promise<Account[]>;
+    supportCoinType(coinType?: string): Promise<boolean>;
+    sign(transaction: Transaction, direct?: boolean): Promise<any>;
 }
 
 export const DEFAULT_HDPATH = "m/44'/0/0'/0/0";
@@ -72,24 +72,32 @@ export const DEFAULT_LEDGER_HDPATH = "m/44'/118/0'/0/0";
 
 export function keyType(chainId: string) {
     switch (true) {
-        case chainId.search(/\w+_\d+-\d+/g) > -1:   // ethermint like chain: evmos_9002-1
-            return "/ethermint.crypto.v1.ethsecp256k1.PubKey"
-        case chainId.startsWith("injective"):
-            return "/injective.crypto.v1beta1.ethsecp256k1.PubKey";
-        case chainId.startsWith("stratos"):
-            return "/stratos.crypto.v1.ethsecp256k1.PubKey";
+        case chainId.search(/\w+_\d+-\d+/g) > -1: // ethermint like chain: evmos_9002-1
+            return '/ethermint.crypto.v1.ethsecp256k1.PubKey';
+        case chainId.startsWith('injective'):
+            return '/injective.crypto.v1beta1.ethsecp256k1.PubKey';
+        case chainId.startsWith('stratos'):
+            return '/stratos.crypto.v1.ethsecp256k1.PubKey';
         default:
-            return "/cosmos.crypto.secp256k1.PubKey"
+            return '/cosmos.crypto.secp256k1.PubKey';
     }
 }
 
 export function readWallet(hdPath?: string) {
     return JSON.parse(
-        localStorage.getItem(hdPath || DEFAULT_HDPATH) ||localStorage.getItem(DEFAULT_LEDGER_HDPATH) || '{}'
-    ) as ConnectedWallet
+        localStorage.getItem(hdPath || DEFAULT_HDPATH) ||
+            localStorage.getItem(DEFAULT_LEDGER_HDPATH) ||
+            '{}'
+    ) as ConnectedWallet;
 }
 export function writeWallet(connected: ConnectedWallet, hdPath?: string) {
-    localStorage.setItem(hdPath || (connected.wallet===WalletName.Keplr ? DEFAULT_HDPATH:DEFAULT_LEDGER_HDPATH), JSON.stringify(connected))
+    localStorage.setItem(
+        hdPath ||
+            (connected.wallet === WalletName.Keplr
+                ? DEFAULT_HDPATH
+                : DEFAULT_LEDGER_HDPATH),
+        JSON.stringify(connected)
+    );
 }
 
 export function removeWallet(hdPath?: string) {
@@ -98,17 +106,22 @@ export function removeWallet(hdPath?: string) {
 }
 
 export function extractChainId(chainId: string) {
-    const start = chainId.indexOf('_')
-    const end = chainId.indexOf('-')
+    const start = chainId.indexOf('_');
+    const end = chainId.indexOf('-');
     if (end > start && start > 0) {
-      return Number(chainId.substring(start + 1, end))
+        return Number(chainId.substring(start + 1, end));
     }
-    return 0
+    return 0;
 }
 
-export function createWallet(name: WalletName, arg: WalletArgument, registry?: Registry, chain?: IChain,): AbstractWallet {
-    const reg = registry || new Registry(defaultRegistryTypes)
-    console.info(name)
+export function createWallet(
+    name: WalletName,
+    arg: WalletArgument,
+    registry?: Registry,
+    chain?: IChain
+): AbstractWallet {
+    const reg = registry || new Registry(defaultRegistryTypes);
+    console.info(name);
 
     switch (name) {
         case WalletName.OKX:
@@ -116,17 +129,19 @@ export function createWallet(name: WalletName, arg: WalletArgument, registry?: R
         case WalletName.Unisat:
             return new UnisatWallet(arg, <IChain>chain, reg);
         case WalletName.Keplr:
-            return new KeplerWallet(arg, reg)
+            return new KeplerWallet(arg, reg);
         case WalletName.Ledger:
-            return new LedgerWallet(arg, reg)
+            return new LedgerWallet(arg, reg);
         case WalletName.Leap:
-            return new LeapWallet(arg, reg)
+            return new LeapWallet(arg, reg);
         case WalletName.MetamaskSnap:
-            return new MetamaskSnapWallet(arg, reg)
+            return new MetamaskSnapWallet(arg, reg);
         case WalletName.Metamask:
-            return arg.hdPath && 
-            (arg.hdPath.startsWith('m/44/60') || arg.hdPath.startsWith("m/44'/60")) 
-            ? new MetamaskWallet(arg, reg) : new MetamaskSnapWallet(arg, reg)
+            return arg.hdPath &&
+                (arg.hdPath.startsWith('m/44/60') ||
+                    arg.hdPath.startsWith("m/44'/60"))
+                ? new MetamaskWallet(arg, reg)
+                : new MetamaskSnapWallet(arg, reg);
     }
-    throw new Error("No wallet connected")
+    throw new Error('No wallet connected');
 }
