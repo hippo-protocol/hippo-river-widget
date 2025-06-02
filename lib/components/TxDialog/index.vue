@@ -89,8 +89,8 @@ const msgType = computed(() => {
             return ClearAdmin;
         case 'community_pool_spend':
             return CommunityPoolSpend;
-        case 'update_params':
-            return UpdateParams
+        // case 'update_params':
+        //     return UpdateParams
         default:
             return Send;
     }
