@@ -37,6 +37,10 @@ import UpdateAdmin from './wasm/UpdateAdmin.vue';
 import ClearAdmin from './wasm/ClearAdmin.vue';
 import { TokenUnitConverter } from '../../utils/TokenUnitConverter';
 
+// custom messages
+import CommunityPoolSpend from './messages/CommunityPoolSpend.vue';
+import UpdateParams from './messages/UpdateParams.vue';
+
 const props = defineProps({
     type: String,
     endpoint: { type: String, required: true },
@@ -46,6 +50,7 @@ const props = defineProps({
     params: String,
 });
 
+const directSignMessages = ['community_pool_spend', 'update_params']
 const msgType = computed(() => {
     switch (props.type?.toLowerCase()) {
         case 'send':
@@ -82,6 +87,10 @@ const msgType = computed(() => {
             return UpdateAdmin;
         case 'wasm_clear_admin':
             return ClearAdmin;
+        case 'community_pool_spend':
+            return CommunityPoolSpend;
+        // case 'update_params':
+        //     return UpdateParams
         default:
             return Send;
     }
@@ -260,7 +269,7 @@ async function sendTx() {
             tx.fee.gas = gasInfo.value.toString();
         }
 
-        const txRaw = await client.sign(tx);
+        const txRaw = await client.sign(tx, directSignMessages.includes(props.type ?? ''));
         const response = await client.broadcastTx(
             props.endpoint,
             txRaw,
