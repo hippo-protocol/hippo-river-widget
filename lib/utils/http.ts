@@ -193,3 +193,15 @@ export const getCommunityPool = async (endpoint: string) => {
 export const getGovParams = async (endpoint: string) => {
     return get(`${endpoint}/cosmos/gov/v1/params/voting`);
 };
+
+export const getIBCChannels = async (endpoint: string) => {
+    return get(`${endpoint}/ibc/core/channel/v1/channels`);
+};
+
+export const getIBCConnections = async (endpoint: string) => {
+    return get(`${endpoint}/ibc/core/connection/v1/connections`);
+};
+
+export const getIBCClientState = async (endpoint: string, clientId: string) => {
+    return get(`${endpoint}/ibc/core/client/v1/client_states/${clientId}`);
+};

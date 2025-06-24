@@ -50,7 +50,7 @@ const props = defineProps({
     params: String,
 });
 
-const directSignMessages = ['community_pool_spend', 'update_params']
+const directSignMessages = ['community_pool_spend', 'update_params', 'transfer']
 const msgType = computed(() => {
     switch (props.type?.toLowerCase()) {
         case 'send':
@@ -368,7 +368,7 @@ const onOpenPopup = () => {
                 <div v-if="sender">
                     <div v-if="view === 'input'">
                         <component :is="msgType" ref="msgBox" :endpoint="endpoint" :sender="sender" :balances="balance"
-                            :metadata="metadatas" :params="props.params" />
+                            :metadata="metadatas" :params="props.params" :chainId="chainId" />
                         <form class="space-y-6" action="#" method="POST">
                             <div :class="advance ? '' : 'hidden'">
                                 <div class="form-control">
