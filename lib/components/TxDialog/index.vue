@@ -50,7 +50,7 @@ const props = defineProps({
     params: String,
 });
 
-const directSignMessages = ['community_pool_spend', 'update_params']
+const directSignMessages = ['community_pool_spend', 'update_params', 'transfer']
 const msgType = computed(() => {
     switch (props.type?.toLowerCase()) {
         case 'send':

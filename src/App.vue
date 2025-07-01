@@ -14,14 +14,14 @@ const HIPPO_MAINNET: Config = {
     endpoint: 'https://api.hippo-protocol.com',
     chainId: 'hippo-protocol-1',
     params: JSON.stringify({}), //change when needed(vote, ...)
-    chainName: 'hippo-protocol',
+    chainName: 'hippoprotocol',
 };
 
 const HIPPO_TESTNET: Config = {
     endpoint: 'https://api.testnet.hippo-protocol.com',
     chainId: 'hippo-protocol-testnet-1',
     params: JSON.stringify({}), //change when needed(vote, ...)
-    chainName: 'hippo-protocol',
+    chainName: 'testnets/hippoprotocoltestnet',
 };
 
 const sender = ref('') //Connected wallet address
