@@ -21,7 +21,7 @@ const HIPPO_TESTNET: Config = {
     endpoint: 'https://api.testnet.hippo-protocol.com',
     chainId: 'hippo-protocol-testnet-1',
     params: JSON.stringify({}), //change when needed(vote, ...)
-    chainName: 'testnets/hippoprotocoltestnet',
+    chainName: 'hippoprotocoltestnet',
 };
 
 const sender = ref('') //Connected wallet address
