@@ -50,7 +50,7 @@ const props = defineProps({
     params: String,
 });
 
-const directSignMessages = ['community_pool_spend', 'update_params']
+const directSignMessages = ['community_pool_spend', 'update_params', 'transfer']
 const msgType = computed(() => {
     switch (props.type?.toLowerCase()) {
         case 'send':
@@ -192,7 +192,7 @@ async function initData() {
             ) {
                 const client = new ChainRegistryClient();
                 client
-                    .fetchAssetsList(props.registryName)
+                    .fetchAssetsList(props.registryName.includes('testnet') && !props.registryName.startsWith('testnets/') ? `testnets/${props.registryName}` : props.registryName)
                     .then((x) => {
                         x.assets.forEach((a) => {
                             metadatas.value[a.base] = a as CoinMetadata;

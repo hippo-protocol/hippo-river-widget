@@ -26,6 +26,11 @@
   dependencies:
     "@babel/runtime" "^7.19.4"
 
+"@chain-registry/types@^2.0.13":
+  version "2.0.13"
+  resolved "https://registry.yarnpkg.com/@chain-registry/types/-/types-2.0.13.tgz#5f1ceb19337aad93186d599e490fa6ec2bb913b5"
+  integrity sha512-gfx45go8omcFri3s6BavspQyWb9McWW9WYagLobTDMWGB9kksmmIq3OzOzDodAvkf0q97yj3Z822Y8TMlOc6bg==
+
 "@chainsafe/as-sha256@^0.4.1":
   version "0.4.1"
   resolved "https://registry.npmjs.org/@chainsafe/as-sha256/-/as-sha256-0.4.1.tgz"
@@ -1182,6 +1187,11 @@
   resolved "https://registry.npmjs.org/@types/google-protobuf/-/google-protobuf-3.15.6.tgz"
   integrity sha512-pYVNNJ+winC4aek+lZp93sIKxnXt5qMkuKmaqS3WGuTq0Bw1ZDYNBgzG5kkdtwcv+GmYJGo3yEg6z2cKKAiEdw==
 
+"@types/lodash@^4.17.19":
+  version "4.17.19"
+  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.17.19.tgz#de18c90b7891f00fed7c1273495a2f851efd99c4"
+  integrity sha512-NYqRyg/hIQrYPT9lbOeYc3kIRabJDn/k4qQHIXUpx88CBDww2fD15Sg5kbXlW86zm2XEW4g0QxkTI3/Kfkc7xQ==
+
 "@types/long@^4.0.1":
   version "4.0.2"
   resolved "https://registry.npmjs.org/@types/long/-/long-4.0.2.tgz"
@@ -1651,6 +1661,13 @@ caniuse-lite@^1.0.30001464, caniuse-lite@^1.0.30001489:
   version "1.0.30001492"
   resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001492.tgz"
   integrity sha512-2efF8SAZwgAX1FJr87KWhvuJxnGJKOnctQa8xLOskAXNXq8oiuqgl6u1kk3fFpsp3GgvzlRjiK1sl63hNtFADw==
+
+chain-registry@^2.0.13:
+  version "2.0.13"
+  resolved "https://registry.yarnpkg.com/chain-registry/-/chain-registry-2.0.13.tgz#a78344f91fe18a74a459aab224b76ca41a78e2f7"
+  integrity sha512-1Ov6PuFdWXAy+epQYQUebMatueO25z+F3K31Rhn95nn/fhl3Xwft37M7f+oqvyNDwT4rsZQw04BJ1raZ06EdKg==
+  dependencies:
+    "@chain-registry/types" "^2.0.13"
 
 chalk@^2.4.1:
   version "2.4.2"
@@ -2425,6 +2442,11 @@ link-module-alias@^1.2.0:
   integrity sha512-ahPjXepbSVKbahTB6LxR//VHm8HPfI+QQygCH+E82spBY4HR5VPJTvlhKBc9F7muVxnS6C1rRfoPOXAbWO/fyw==
   dependencies:
     chalk "^2.4.1"
+
+lodash@^4.17.21:
+  version "4.17.21"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
+  integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
 
 long@^4.0.0:
   version "4.0.0"
