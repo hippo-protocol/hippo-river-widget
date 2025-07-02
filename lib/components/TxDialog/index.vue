@@ -171,8 +171,23 @@ async function initData() {
                     if (coin.denom.length < 12)
                         getBalanceMetadata(props.endpoint, coin.denom)
                             .then((meta) => {
-                                if (meta.metadata)
+                                if (meta.metadata) {
+                                    if (meta.metadata.base === 'ahp' && meta.metadata.denom_units.length === 1 && meta.metadata.denom_units[0].denom === 'ahp') {
+                                        meta.metadata = {
+                                            ...meta.metadata,
+                                            denom_units: [
+                                                ...meta.metadata.denom_units,
+                                                {
+                                                    denom: 'hp',
+                                                    exponent: 18,
+                                                    aliases: [],
+                                                }
+                                            ],
+                                            display: 'hp'
+                                        }
+                                    }
                                     metadatas.value[coin.denom] = meta.metadata;
+                                }
                             })
                             .catch(() => { });
                     if (coin.denom.startsWith('ibc/')) {
@@ -195,6 +210,19 @@ async function initData() {
                     .fetchAssetsList(props.registryName.includes('testnet') && !props.registryName.startsWith('testnets/') ? `testnets/${props.registryName}` : props.registryName)
                     .then((x) => {
                         x.assets.forEach((a) => {
+                            if (a.base === 'ahp' && a.denom_units.length === 1 && a.denom_units[0].denom === 'ahp') {
+                                a = {
+                                    ...a,
+                                    denom_units: [
+                                        ...a.denom_units,
+                                        {
+                                            denom: 'hp',
+                                            exponent: 18,
+                                        }
+                                    ],
+                                    display: 'hp',
+                                }
+                            }
                             metadatas.value[a.base] = a as CoinMetadata;
                         });
                     })
