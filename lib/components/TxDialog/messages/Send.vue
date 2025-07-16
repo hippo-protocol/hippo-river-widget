@@ -17,9 +17,9 @@ const amount = ref('');
 const recipient = ref('');
 const denom = ref('');
 const amountDenom = ref('hp')
-const convert = new TokenUnitConverter(props.metadata);
 
 const msgs = computed(() => {
+    const convert = new TokenUnitConverter(props.metadata);
     return [
         {
             typeUrl: '/cosmos.bank.v1beta1.MsgSend',

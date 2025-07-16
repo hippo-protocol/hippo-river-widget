@@ -100,6 +100,46 @@ const advance = ref(false);
 const sending = ref(false);
 const balance = ref([] as Coin[]);
 const metadatas = ref({} as Record<string, CoinMetadata>);
+const ibcMetadatas = ref({
+    'ibc/6C9D4572489D0C80E14D39C8D0075CE0BBB0779FD582374448E96DB293325643': {
+        base: 'ibc/6C9D4572489D0C80E14D39C8D0075CE0BBB0779FD582374448E96DB293325643',
+        name: 'Tether USD',
+        description: 'Tether USD',
+        display: 'usdt',
+        symbol: 'USDT',
+        denom_units: [
+            {
+                denom: 'ibc/6C9D4572489D0C80E14D39C8D0075CE0BBB0779FD582374448E96DB293325643',
+                exponent: 0,
+                aliases: []
+            },
+            {
+                denom: 'usdt',
+                exponent: 6,
+                aliases: []
+            },
+        ]
+    },
+    "ibc/F5FABF52B54E65064B57BF6DBD8E5FAD22CEE9F4B8A57ADBB20CCD0173AA72A4": {
+        base: 'ibc/F5FABF52B54E65064B57BF6DBD8E5FAD22CEE9F4B8A57ADBB20CCD0173AA72A4',
+        name: 'USD Coin',
+        description: 'USD Coin',
+        display: 'usdc',
+        symbol: 'USDC',
+        denom_units: [
+            {
+                denom: 'ibc/F5FABF52B54E65064B57BF6DBD8E5FAD22CEE9F4B8A57ADBB20CCD0173AA72A4',
+                exponent: 0,
+                aliases: []
+            },
+            {
+                denom: 'usdc',
+                exponent: 6,
+                aliases: []
+            },
+        ]
+    }
+} as Record<string, CoinMetadata>);
 const emit = defineEmits(['submited', 'confirmed', 'view']);
 
 // functional variable
@@ -191,11 +231,15 @@ async function initData() {
                             })
                             .catch(() => { });
                     if (coin.denom.startsWith('ibc/')) {
-                        getIBCDenomMetadata(coin.denom)
-                            .then((meta) => {
-                                if (meta) metadatas.value[coin.denom] = meta;
-                            })
-                            .catch(() => { });
+                        if (ibcMetadatas.value[coin.denom]) {
+                            metadatas.value[coin.denom] = ibcMetadatas.value[coin.denom];
+                        } else {
+                            getIBCDenomMetadata(coin.denom)
+                                .then((meta) => {
+                                    if (meta) metadatas.value[coin.denom] = meta;
+                                })
+                                .catch(() => { });
+                        }
                     }
                 });
             });
