@@ -24,6 +24,8 @@ const summary = ref("")
 const authority = ref("")
 const recipient = ref("")
 const amount = ref("")
+const expedited = ref(false)
+
 const communityPoolAvailable = ref(
     { amount: "0", denom: "ahp" }
 )
@@ -81,6 +83,7 @@ const msgs = computed(() => {
             proposer: props.sender,
             title: title.value,
             summary: summary.value,
+            expedited: expedited.value,
         })
     }]
 })
@@ -157,6 +160,12 @@ defineExpose({ msgs, isValid, initial })
                 <span class="label-text">Summary</span>
                 <input v-model="summary" type="text"
                     class="text-gray-600 dark:text-white input border !border-gray-300 dark:!border-gray-600" />
+            </label>
+        </div>
+        <div class="form-control">
+            <label class="label">
+                <span class="label-text">Expedited</span>
+                <input class="w-[30px] h-[30px]" v-model="expedited" type="checkbox" />
             </label>
         </div>
         <div class="form-control">
