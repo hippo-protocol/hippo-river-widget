@@ -32,11 +32,11 @@
         "trypublish": "npm publish || true"
     },
     "dependencies": {
-        "@cosmjs/amino": "^0.34.0",
-        "@cosmjs/cosmwasm-stargate": "^0.34.0",
-        "@cosmjs/ledger-amino": "^0.34.0",
-        "@cosmjs/proto-signing": "^0.34.0",
-        "@cosmjs/stargate": "^0.34.0",
+        "@cosmjs/amino": "^0.36.0",
+        "@cosmjs/cosmwasm-stargate": "^0.36.0",
+        "@cosmjs/ledger-amino": "^0.36.0",
+        "@cosmjs/proto-signing": "^0.36.0",
+        "@cosmjs/stargate": "^0.36.0",
         "@ethersproject/hash": "5.8.0",
         "@ethersproject/signing-key": "5.8.0",
         "@leapwallet/cosmos-snap-provider": "^0.1.26",
