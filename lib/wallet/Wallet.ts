@@ -2,6 +2,7 @@ import { Registry } from '@cosmjs/proto-signing';
 import { defaultRegistryTypes } from '@cosmjs/stargate';
 import { Transaction } from '../utils/type';
 import { KeplerWallet } from './wallets/KeplerWallet';
+import { GateWallet } from './wallets/GateWallet';
 import { LedgerWallet } from './wallets/LedgerWallet';
 import { MetamaskWallet } from './wallets/MetamaskWallet';
 import { MetamaskSnapWallet } from './wallets/MetamaskSnapWallet';
@@ -11,6 +12,7 @@ import { UnisatWallet } from './wallets/UnisatWallet';
 
 export enum WalletName {
     Keplr = 'Keplr',
+    GateWallet = 'Gate Wallet',
     Ledger = 'LedgerUSB',
     LedgerBLE = 'LedgerBLE',
     Metamask = 'Metamask',
@@ -93,7 +95,7 @@ export function readWallet(hdPath?: string) {
 export function writeWallet(connected: ConnectedWallet, hdPath?: string) {
     localStorage.setItem(
         hdPath ||
-            (connected.wallet === WalletName.Keplr
+            (connected.wallet === WalletName.Keplr || connected.wallet === WalletName.GateWallet
                 ? DEFAULT_HDPATH
                 : DEFAULT_LEDGER_HDPATH),
         JSON.stringify(connected)
@@ -130,6 +132,8 @@ export function createWallet(
             return new UnisatWallet(arg, <IChain>chain, reg);
         case WalletName.Keplr:
             return new KeplerWallet(arg, reg);
+        case WalletName.GateWallet:
+            return new GateWallet(arg, reg);
         case WalletName.Ledger:
             return new LedgerWallet(arg, reg);
         case WalletName.Leap:
