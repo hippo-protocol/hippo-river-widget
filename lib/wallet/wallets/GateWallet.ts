@@ -164,9 +164,9 @@ export class GateWallet implements AbstractWallet {
     }
 
     async signAmino(tx: Transaction): Promise<TxRaw> {
-        const accouts = await this.getAccounts();
+        const accounts = await this.getAccounts();
         const hex = toHex(fromBech32(tx.signerAddress).data);
-        const accountFromSigner = accouts.find(
+        const accountFromSigner = accounts.find(
             (account) => toHex(fromBech32(account.address).data) === hex
         );
         if (!accountFromSigner) {
