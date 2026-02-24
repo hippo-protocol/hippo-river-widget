@@ -12,7 +12,7 @@ import { makeSignDoc as makeSignDocAmino } from '@cosmjs/amino';
 import { createWasmAminoConverters } from '@cosmjs/cosmwasm-stargate';
 import { Buffer } from 'buffer';
 
-import { serializeSignDoc } from '@cosmjs/amino/build/signdoc';
+import { serializeSignDoc } from '@cosmjs/amino';
 
 export class UnisatWallet implements AbstractWallet {
   name: WalletName.Unisat = WalletName.Unisat;

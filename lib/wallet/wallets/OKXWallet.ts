@@ -1,7 +1,7 @@
 import { fromBase64, fromHex } from '@cosmjs/encoding';
 import { makeAuthInfoBytes, makeSignBytes, makeSignDoc, Registry, TxBodyEncodeObject } from '@cosmjs/proto-signing';
 
-import { serializeSignDoc } from '@cosmjs/amino/build/signdoc';
+import { serializeSignDoc } from '@cosmjs/amino';
 
 import { AbstractWallet, Account, IChain, WalletArgument, WalletName } from '../Wallet';
 import { Transaction } from '../../utils/type';
