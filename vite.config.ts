@@ -17,6 +17,7 @@ export default defineConfig({
             stream: 'stream-browserify',
             crypto: 'crypto-browserify',
             assert: 'assert-browserify',
+            '@noble/curves/secp256k1': '@noble/curves/secp256k1.js'
         },
     },
     optimizeDeps: {

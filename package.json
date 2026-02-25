@@ -43,6 +43,7 @@
         "@ledgerhq/hw-transport-web-ble": "^6.29.8",
         "@ledgerhq/hw-transport-webusb": "^6.29.8",
         "@metamask/eth-sig-util": "^8.2.0",
+        "@noble/curves": "^2.0.1",
         "@ping-pub/chain-registry-client": "^0.0.25",
         "@tharsis/eip712": "^0.2.4",
         "@tharsis/proto": "^0.1.20",
