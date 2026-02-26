@@ -12,12 +12,12 @@ import {
 } from './Wallet';
 import { post } from '../utils/http';
 import { BroadcastMode, Transaction, TxResponse } from '../utils/type';
-import { wasmTypes } from '@cosmjs/cosmwasm-stargate/build/modules';
+import { wasmTypes } from '@cosmjs/cosmwasm';
 import {
     makeAuthInfoBytes,
     makeSignDoc,
     TxBodyEncodeObject,
-} from '@cosmjs/proto-signing/build';
+} from '@cosmjs/proto-signing';
 import { Any } from 'cosmjs-types/google/protobuf/any';
 
 export function isEthermint(chainId: string) {
