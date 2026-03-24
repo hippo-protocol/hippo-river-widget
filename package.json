@@ -57,7 +57,7 @@
         "dayjs": "^1.11.7",
         "fflate": "^0.8.0",
         "lodash": "^4.17.21",
-        "osmojs": "^16.15.0",
+        "osmojs": "^15.5.0",
         "vue": "^3.2.47",
         "vue3-webcomponent-wrapper": "^0.2.0"
     },
