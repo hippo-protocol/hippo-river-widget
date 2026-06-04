@@ -162,7 +162,7 @@ function initial() {
         to: data.chain2.chainName,
         path: `${data.chain1.chainName}-${data.chain2.chainName}`,
         channels: data.channels
-    })), 'path'); // It seems there are duplicate datas in the ibcData
+    })), item => `${item.path}-${item.channels?.at(0)?.chain1?.channelId}-${item.channels?.at(0)?.chain1?.portId}-${item.channels?.at(0)?.chain2?.channelId}-${item.channels?.at(0)?.chain2?.portId}`);
 
     getStakingParam(props.endpoint).then((x) => {
         denom.value = x.params.bond_denom;
@@ -206,7 +206,9 @@ defineExpose({ msgs, isValid, initial });
                 :disabled="destDisabled">
                 <option value="">Select Destination</option>
                 <option v-for="v in chains" :value="v.path">
-                    {{ v.from === chainName ? v.to : v.from }}
+                    {{ v.from === chainName ?
+                        (v.channels?.at(0)?.chain1?.channelId ?? '') + ' / ' + v.to :
+                        (v.channels?.at(0)?.chain2?.channelId ?? '') + ' / ' + v.from }}
                 </option>
             </select>
         </div>
