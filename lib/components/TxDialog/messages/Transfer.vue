@@ -2,12 +2,10 @@
 import { PropType, computed, ref } from 'vue';
 import { getStakingParam, getDenomTraces } from '../../../utils/http';
 import { Coin, CoinMetadata } from '../../../utils/type';
-import { ibcData } from 'chain-registry';
 import { IBCPath } from '@ping-pub/chain-registry-client/dist/types';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import { TokenUnitConverter } from '../../../utils/TokenUnitConverter';
-import { uniqBy } from 'lodash';
 dayjs.extend(utc);
 
 const props = defineProps({
@@ -157,12 +155,55 @@ function initial() {
     if (props.endpoint.includes('testnet')) {
         chainName.value = 'hippoprotocoltestnet'
     }
-    chains.value = uniqBy(ibcData.filter(ibc => ibc.chain1.chainName === chainName.value || ibc.chain2.chainName === chainName.value).map(data => ({
-        from: data.chain1.chainName,
-        to: data.chain2.chainName,
-        path: `${data.chain1.chainName}-${data.chain2.chainName}`,
-        channels: data.channels
-    })), item => `${item.path}-${item.channels?.at(0)?.chain1?.channelId}-${item.channels?.at(0)?.chain1?.portId}-${item.channels?.at(0)?.chain2?.channelId}-${item.channels?.at(0)?.chain2?.portId}`);
+    chains.value = chainName.value === 'hippoprotocol' ? [
+        {
+            "from": "hippoprotocol",
+            "to": "osmosis",
+            "path": "hippoprotocol-osmosis",
+            "channels": [
+                {
+                    "chain1": {
+                        "channelId": "channel-1",
+                        "portId": "transfer"
+                    },
+                    "chain2": {
+                        "channelId": "channel-110277",
+                        "portId": "transfer"
+                    },
+                    "ordering": "unordered",
+                    "version": "ics20-1",
+                    "tags": {
+                        "preferred": true,
+                        "status": "ACTIVE"
+                    }
+                }
+            ]
+        }
+    ] as any : [
+        {
+            "from": "hippoprotocoltestnet",
+            "to": "osmosistestnet",
+            "path": "hippoprotocoltestnet-osmosistestnet",
+            "channels": [
+                {
+                    "chain1": {
+                        "channelId": "channel-0",
+                        "portId": "transfer"
+                    },
+                    "chain2": {
+                        "channelId": "channel-10743",
+                        "portId": "transfer"
+                    },
+                    "ordering": "unordered",
+                    "version": "ics20-1",
+                    "tags": {
+                        "preferred": true,
+                        "status": "ACTIVE"
+                    }
+                }
+            ]
+        }
+    ]
 
     getStakingParam(props.endpoint).then((x) => {
         denom.value = x.params.bond_denom;
