@@ -673,7 +673,7 @@ function fetchTx(tx: string) {
         <input v-model="open" type="checkbox" id="PingTokenConvert" class="modal-toggle" @change="initData()" />
 
         <label for="PingTokenConvert" class="modal cursor-pointer">
-            <label class="modal-box dark:bg-[#2a2a3a] rounded-lg" for="">
+            <label class="modal-box ping-widget-modal-box rounded-lg" for="">
                 <div v-show="view === 'swap'">
                     <div class="absolute right-4 top-4 dropdown dropdown-end dropdown-hover">
                         <label tabindex="0" class="text-info">

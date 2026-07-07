@@ -271,7 +271,7 @@ onUnmounted(() => {
         <input v-model="open" type="checkbox" id="PingConnectWallet" class="modal-toggle" />
 
         <label for="PingConnectWallet" class="modal cursor-pointer z-[999999]">
-            <label class="modal-box rounded-lg" for="">
+            <label class="modal-box ping-widget-modal-box rounded-lg" for="">
                 <h3 class="text-xl font-semibold">Connect Wallet</h3>
                 <ul role="list" class="bg-gray-100 dark:bg-gray-900 rounded-lg mt-4 px-3 py-3">
                     <li class="flex items-center px-2 py-3 hover:bg-gray-200 dark:hover:bg-gray-800 rounded-lg cursor-pointer"

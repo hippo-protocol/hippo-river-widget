@@ -425,7 +425,7 @@ const onOpenPopup = () => {
         <!-- Put this part before </body> tag -->
         <input v-model="open" type="checkbox" :id="type" class="modal-toggle" @change="onOpenPopup()" />
         <label :for="type" class="modal cursor-pointer">
-            <label class="modal-box relative p-5" :class="{
+            <label class="modal-box ping-widget-modal-box relative p-5" :class="{
                 '!w-11/12 !max-w-5xl': String(type).startsWith('wasm'),
             }" for="">
                 <label :for="type" class="btn btn-sm btn-circle absolute right-4 top-4">✕</label>
