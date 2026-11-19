@@ -12,7 +12,7 @@ const props = defineProps({
 });
 
 const params = computed(() => JSON.parse(props.params || "{}"))
-const denom = ref("")
+const denom = ref('ahp')
 const amount = ref("")
 const amountDenom = ref("hp")
 

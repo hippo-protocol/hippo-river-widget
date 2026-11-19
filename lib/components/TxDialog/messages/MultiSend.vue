@@ -14,7 +14,7 @@ const props = defineProps({
 
 const amount = ref(['']);
 const recipient = ref(['']);
-const denom = ref('');
+const denom = ref('ahp');
 const amountDenom = ref('hp')
 const convert = new TokenUnitConverter(
     // below can be simplied to props.metadata if metadata api works.

@@ -13,7 +13,7 @@ const props = defineProps({
     params: String,
 });
 
-const denom = ref("")
+const denom = ref('ahp')
 const deposit = ref("")
 const amountDenom = ref("hp")
 const title = ref("")

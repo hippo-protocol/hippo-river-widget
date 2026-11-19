@@ -15,7 +15,7 @@ const props = defineProps({
 
 const amount = ref('');
 const recipient = ref('');
-const denom = ref('');
+const denom = ref('ahp');
 const amountDenom = ref('hp')
 
 const msgs = computed(() => {
